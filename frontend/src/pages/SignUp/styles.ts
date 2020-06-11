@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 import SignupBg from '../../assets/signup-bg.png';
 
-
-
 export const Container = styled.div`
   height: 100vh;
   display: flex;

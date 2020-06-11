@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
 
-
   span {
     background: #ff9000;
     padding: 8px;
@@ -12,7 +11,7 @@ export const Container = styled.div`
     font-weight: 500;
     width: 160px;
     opacity: 0;
-    transition:0.4s;
+    transition: 0.4s;
     visibility: hidden;
     position: absolute;
     bottom: calc(100% + 12px);
@@ -32,7 +31,7 @@ export const Container = styled.div`
     }
   }
 
-  &:hover span{
+  &:hover span {
     visibility: visible;
     opacity: 1;
   }
