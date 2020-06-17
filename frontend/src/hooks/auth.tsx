@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
@@ -17,18 +18,15 @@ interface AuthContextData {
   signOut(): void;
 }
 
-const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData,
-);
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
-
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
 
     if (token && user) {
-      return {token, user: JSON.parse(user)}
+      return { token, user: JSON.parse(user) };
     }
 
     return {} as AuthState;
@@ -37,7 +35,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
       email,
-      password
+      password,
     });
 
     const { token, user } = response.data;
@@ -52,11 +50,11 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@GoBarber:token');
     localStorage.removeItem('@GoBarber:user');
 
-    setData({} as AuthState)
-  },[])
+    setData({} as AuthState);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut  }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
@@ -65,11 +63,11 @@ const AuthProvider: React.FC = ({ children }) => {
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
 
-  if (!context){
-    throw new Error('useAuth must be used within an AuthProvider')
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
   }
 
-  return context
+  return context;
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };
